@@ -1,27 +1,54 @@
-# FrontLibretaDirecciones
+# Proyecto Angular: Front_libreta_direcciones
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.3.
+Este es un proyecto desarrollado en Angular que consume las APIs proporcionadas por el proyecto Laravel para la gestión de contactos. A continuación, se detalla la funcionalidad, la configuración y las instrucciones para ejecutar y utilizar el proyecto.
 
-## Development server
+## Funcionalidad
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**Gestión de Contactos:**
+  - Permite obtener, crear, editar y eliminar contactos a través de la interfaz de usuario.
+  - Cada contacto puede estar asociado con números de teléfono, direcciones y correos electrónicos.
+  
+## Requisitos
 
-## Code scaffolding
+Node.js versión 20.14.0.
+npm versión 10.8.1.
+Angular CLI.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Instalación
 
-## Build
+1. **Clonar el Proyecto:**
+   - Clona el proyecto desde GitHub.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+     bash
+     https://github.com/Heriberto778/front_libreta_direcciones.git
+     
+2. **Instalar Dependencias:**
+   - Desde el directorio del proyecto, instala las dependencias utilizando npm.
 
-## Running unit tests
+     bash
+     npm install
+     
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+4. **Iniciar el Servidor de Desarrollo:**
+   - Ejecuta el siguiente comando para iniciar el servidor de desarrollo de Angular.
 
-## Running end-to-end tests
+     bash
+     ng serve
+     
+   - Abre tu navegador y navega a http://localhost:4200.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Uso
 
-## Further help
+### Componentes
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. **Componente de Listado de Contactos:**
+   - Muestra todos los contactos obtenidos de la API.
+
+2. **Componente de Creación de Contactos:**
+   - Formulario para crear un nuevo contacto.
+
+3. **Componente de Edición de Contactos:**
+   - Formulario para editar un contacto existente.
+
+4. **Componente de Eliminación de Contactos:**
+   - Confirmación y eliminación de un contacto.
