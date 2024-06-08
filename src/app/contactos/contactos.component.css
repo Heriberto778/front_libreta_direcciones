@@ -1,0 +1,17 @@
+.container {
+    margin: 20px;
+  }
+  
+  mat-paginator {
+    margin-top: 20px;
+  }
+  
+  .mat-paginator-page-size {
+    display: inline-flex;
+    align-items: center;
+  }
+  
+  .mat-paginator-page-size-label {
+    margin-right: 8px;
+  }
+  
