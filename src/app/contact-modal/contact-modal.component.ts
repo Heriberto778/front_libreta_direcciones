@@ -62,6 +62,7 @@ export class ContactModalComponent {
         this.dialogRef.close(this.contacto);
       },
       error: error => {
+        Swal.fire('Error!', error.error.error, 'error');
         console.error('Error al agregar contacto:', error);
       }
     });
@@ -73,12 +74,11 @@ export class ContactModalComponent {
       next: response => {
         console.log('Contacto actualizado:', response);
         Swal.fire('Exitoso!', 'Contacto actualizado exitosamente.', 'success');
-        this.apiService.getContactos()
         this.dialogRef.close(this.contacto);
       },
       error: error => {
-        Swal.fire('Error!', 'Error al actualizar contacto.', 'error');
-        console.error('Error al actualizar contacto:', error);
+        Swal.fire('Error!', error.error.error, 'error');
+        console.error('Error al actualizar contacto:', error.error.error);
       }
     });
   }
