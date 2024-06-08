@@ -1,0 +1,12 @@
+/* src/app/confirm-modal/confirm-modal.component.css */
+.modal-content {
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+  }
+  

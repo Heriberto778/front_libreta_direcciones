@@ -6,6 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ContactModalComponent } from '../contact-modal/contact-modal.component';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'; // Asegúrate de importar el componente de confirmación
 
 @Component({
   selector: 'app-contactos',
@@ -58,14 +59,25 @@ export class ContactosComponent implements OnInit {
   }
 
   eliminar(id: number): void {
-    this.apiService.eliminarContacto(id).subscribe({
-      next: () => {
-        console.log('Contacto eliminado');
-        this.getContactos();
-      },
-      error: error => {
-        console.error('Error al eliminar contacto:', error);
-        // Aquí puedes mostrar un mensaje de error si es necesario
+    const dialogRef = this.dialog.open(ConfirmModalComponent, {
+      width: '300px',
+      data: { message: '¿Estás seguro de que deseas eliminar este contacto?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        if (result) {
+          this.apiService.eliminarContacto(id).subscribe({
+            next: () => {
+              console.log('Contacto eliminado');
+              this.getContactos(); // Cargar contactos después de eliminar
+            },
+            error: error => {
+              console.error('Error al eliminar contacto:', error);
+              // Aquí puedes mostrar un mensaje de error si es necesario
+            }
+          });
+        }
       }
     });
   }

@@ -1,1 +1,9 @@
-<p>confirm-modal works!</p>
+<!-- src/app/confirm-modal/confirm-modal.component.html -->
+<div class="modal-content">
+    <h2>{{ data.message }}</h2>
+    <div class="modal-actions">
+      <button mat-button (click)="onCancel()">Cancelar</button>
+      <button mat-button (click)="onConfirm()">Confirmar</button>
+    </div>
+  </div>
+  
