@@ -14,6 +14,16 @@
     <mat-label>Apellido Materno</mat-label>
     <input matInput [(ngModel)]="contacto.apellido_materno">
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Teléfonos (separados por comas)</mat-label>
+    <input matInput [(ngModel)]="telefonos">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Emails (separados por comas)</mat-label>
+    <input matInput [(ngModel)]="emails">
+  </mat-form-field>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
