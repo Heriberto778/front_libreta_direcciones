@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
 
-  private apiUrl = 'http://34.203.236.22:8003/api/contactos/'; // URL de la API que quieres consumir
+  private apiUrl = 'http://34.203.236.22:8003/api/contactos/';
 
   constructor(private http: HttpClient) { }
 
@@ -16,13 +16,13 @@ export class ApiService {
   }
 
   eliminarContacto(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl}eliminar/${id}`);
   }
   agregarContacto(contacto: any): Observable<any> {
     return this.http.post(`${this.apiUrl}crear`, contacto);
   }
   updateContact(contact: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/update/${contact.id}`, contact);
+    return this.http.put(`${this.apiUrl}actualizar/${contact.id}`, contact);
   }
 
 }

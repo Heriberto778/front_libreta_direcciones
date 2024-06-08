@@ -8,7 +8,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';  // Importa MatIconModule
+import { MatIconModule } from '@angular/material/icon';
 
 
 import { MatDialogModule } from '@angular/material/dialog';

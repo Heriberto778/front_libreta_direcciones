@@ -1,6 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ApiService } from '../servicios/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact-modal',
@@ -25,7 +26,7 @@ export class ContactModalComponent {
   constructor(
     public dialogRef: MatDialogRef<ContactModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private apiService: ApiService // Usa ApiService en lugar de ContactService
+    private apiService: ApiService
   ) {
     if (data && data.contacto) {
       this.isEditMode = true;
@@ -62,7 +63,6 @@ export class ContactModalComponent {
       },
       error: error => {
         console.error('Error al agregar contacto:', error);
-        // Aquí puedes mostrar un mensaje de error si es necesario
       }
     });
   }
@@ -72,11 +72,13 @@ export class ContactModalComponent {
     this.apiService.updateContact(this.contacto).subscribe({
       next: response => {
         console.log('Contacto actualizado:', response);
+        Swal.fire('Exitoso!', 'Contacto actualizado exitosamente.', 'success');
+        this.apiService.getContactos()
         this.dialogRef.close(this.contacto);
       },
       error: error => {
+        Swal.fire('Error!', 'Error al actualizar contacto.', 'error');
         console.error('Error al actualizar contacto:', error);
-        // Aquí puedes mostrar un mensaje de error si es necesario
       }
     });
   }

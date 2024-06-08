@@ -3,10 +3,11 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ApiService } from '../servicios/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import Swal from 'sweetalert2';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ContactModalComponent } from '../contact-modal/contact-modal.component';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'; // Asegúrate de importar el componente de confirmación
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 
 @Component({
   selector: 'app-contactos',
@@ -51,6 +52,7 @@ export class ContactosComponent implements OnInit {
       if (result) {
         const index = this.dataSource.data.findIndex(c => c.id === contacto.id);
         if (index !== -1) {
+          this.getContactos();
           this.dataSource.data[index] = result;
           this.dataSource.data = [...this.dataSource.data];
         }
@@ -70,11 +72,12 @@ export class ContactosComponent implements OnInit {
           this.apiService.eliminarContacto(id).subscribe({
             next: () => {
               console.log('Contacto eliminado');
-              this.getContactos(); // Cargar contactos después de eliminar
+              Swal.fire('Exitoso!', 'Contacto eliminado exitosamente.', 'success');
+              this.getContactos();
             },
             error: error => {
               console.error('Error al eliminar contacto:', error);
-              // Aquí puedes mostrar un mensaje de error si es necesario
+              Swal.fire('Error!', 'Error al eliminar contacto.', 'error');
             }
           });
         }
@@ -93,9 +96,11 @@ export class ContactosComponent implements OnInit {
           (response) => {
             this.dataSource.data.push(response);
             this.dataSource._updateChangeSubscription();
+            Swal.fire('Exitoso!', 'Contacto Agregado exitosamente.', 'success');
             this.getContactos();
           },
           (error) => {
+            Swal.fire('Error!', 'Error al agregar contacto.', 'error');
             console.error('Error al agregar contacto', error);
           }
         );
