@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Agregar Nuevo Contacto</h2>
+<mat-dialog-content>
+  <mat-form-field>
+    <mat-label>Nombre</mat-label>
+    <input matInput [(ngModel)]="contacto.nombre">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Apellido Paterno</mat-label>
+    <input matInput [(ngModel)]="contacto.apellido_paterno">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Apellido Materno</mat-label>
+    <input matInput [(ngModel)]="contacto.apellido_materno">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="onSave()">Guardar</button>
+</mat-dialog-actions>

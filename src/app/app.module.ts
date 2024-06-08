@@ -9,13 +9,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { ContactosComponent } from './contactos/contactos.component';
+import { ContactModalComponent } from './contact-modal/contact-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ContactosComponent
+    ContactosComponent,
+    ContactModalComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +32,10 @@ import { ContactosComponent } from './contactos/contactos.component';
     MatPaginatorModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatInputModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

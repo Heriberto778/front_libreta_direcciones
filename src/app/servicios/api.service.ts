@@ -18,5 +18,8 @@ export class ApiService {
   eliminarContacto(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
+  agregarContacto(contacto: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}`, contacto);
+  }
 
 }

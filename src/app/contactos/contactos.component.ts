@@ -4,6 +4,9 @@ import { ApiService } from '../servicios/api.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 
+import { MatDialog } from '@angular/material/dialog';
+import { ContactModalComponent } from '../contact-modal/contact-modal.component';
+
 @Component({
   selector: 'app-contactos',
   templateUrl: './contactos.component.html',
@@ -16,7 +19,7 @@ export class ContactosComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getContactos();
@@ -54,6 +57,22 @@ export class ContactosComponent implements OnInit {
   }
 
   agregar(): void {
-    console.log('Agregar nuevo contacto');
+    const dialogRef = this.dialog.open(ContactModalComponent, {
+      width: '300px'
+    });
+
+    dialogRef.afterClosed().subscribe((contacto) => {
+      if (contacto) {
+        this.apiService.agregarContacto(contacto).subscribe(
+          (response) => {
+            this.dataSource.data.push(response);
+            this.dataSource._updateChangeSubscription();
+          },
+          (error) => {
+            console.error('Error al agregar contacto', error);
+          }
+        );
+      }
+    });
   }
 }
