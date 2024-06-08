@@ -15,7 +15,7 @@ import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component'
 })
 
 export class ContactosComponent implements OnInit {
-  displayedColumns: string[] = ['nombre', 'apellido_paterno', 'apellido_materno', 'acciones'];
+  displayedColumns: string[] = ['nombre', 'apellido_paterno', 'apellido_materno', 'telefono', 'email', 'direccion',  'acciones'];
   dataSource = new MatTableDataSource<any>([]);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

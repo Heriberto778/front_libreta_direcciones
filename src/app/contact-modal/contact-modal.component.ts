@@ -30,12 +30,14 @@ export class ContactModalComponent {
     if (data && data.contacto) {
       this.isEditMode = true;
       this.contacto = { ...data.contacto };
-      this.telefonos = this.contacto.telefonos.join(', ');
-      this.emails = this.contacto.emails.join(', ');
-      this.direcciones = this.contacto.direcciones.join(', ');
+      this.telefonos = this.unifyContactInfo(this.contacto.telefonos, 'telefono');
+      this.emails = this.unifyContactInfo(this.contacto.emails, 'email');
+      this.direcciones = this.unifyContactInfo(this.contacto.direcciones, 'direccion');
     }
   }
-
+  unifyContactInfo(dataArray: any[], key: string): string {
+    return dataArray ? dataArray.map(item => item[key]).join(', ') : '';
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
@@ -66,6 +68,7 @@ export class ContactModalComponent {
   }
 
   actualizarContacto(): void {
+    console.log("aaaa",this.contacto)
     this.apiService.updateContact(this.contacto).subscribe({
       next: response => {
         console.log('Contacto actualizado:', response);
