@@ -18,12 +18,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ContactosComponent } from './contactos/contactos.component';
 import { ContactModalComponent } from './contact-modal/contact-modal.component';
+import { ConfirmModalComponent } from './confirm-modal/confirm-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactosComponent,
-    ContactModalComponent
+    ContactModalComponent,
+    ConfirmModalComponent
   ],
   imports: [
     BrowserModule,

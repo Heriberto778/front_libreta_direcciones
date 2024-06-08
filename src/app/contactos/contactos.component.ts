@@ -41,19 +41,33 @@ export class ContactosComponent implements OnInit {
   }
 
   editar(contacto: any): void {
-    console.log('Editar contacto:', contacto);
+    const dialogRef = this.dialog.open(ContactModalComponent, {
+      width: '300px',
+      data: { contacto }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const index = this.dataSource.data.findIndex(c => c.id === contacto.id);
+        if (index !== -1) {
+          this.dataSource.data[index] = result;
+          this.dataSource.data = [...this.dataSource.data];
+        }
+      }
+    });
   }
 
   eliminar(id: number): void {
-    this.apiService.eliminarContacto(id).subscribe(
-      (response) => {
-        this.dataSource.data = this.dataSource.data.filter((contacto: any) => contacto.id !== id);
-        console.log('Contacto eliminado', response);
+    this.apiService.eliminarContacto(id).subscribe({
+      next: () => {
+        console.log('Contacto eliminado');
+        this.getContactos();
       },
-      (error) => {
-        console.error('Error al eliminar contacto', error);
+      error: error => {
+        console.error('Error al eliminar contacto:', error);
+        // Aquí puedes mostrar un mensaje de error si es necesario
       }
-    );
+    });
   }
 
   agregar(): void {
@@ -67,6 +81,7 @@ export class ContactosComponent implements OnInit {
           (response) => {
             this.dataSource.data.push(response);
             this.dataSource._updateChangeSubscription();
+            this.getContactos();
           },
           (error) => {
             console.error('Error al agregar contacto', error);

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { ApiService } from '../servicios/api.service';
 
 @Component({
   selector: 'app-contact-modal',
@@ -19,8 +20,21 @@ export class ContactModalComponent {
   telefonos = '';
   emails = '';
   direcciones = '';
+  isEditMode = false;
 
-  constructor(public dialogRef: MatDialogRef<ContactModalComponent>) {}
+  constructor(
+    public dialogRef: MatDialogRef<ContactModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private apiService: ApiService // Usa ApiService en lugar de ContactService
+  ) {
+    if (data && data.contacto) {
+      this.isEditMode = true;
+      this.contacto = { ...data.contacto };
+      this.telefonos = this.contacto.telefonos.join(', ');
+      this.emails = this.contacto.emails.join(', ');
+      this.direcciones = this.contacto.direcciones.join(', ');
+    }
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -30,6 +44,37 @@ export class ContactModalComponent {
     this.contacto.telefonos = this.telefonos.split(',').map(t => t.trim());
     this.contacto.emails = this.emails.split(',').map(e => e.trim());
     this.contacto.direcciones = this.direcciones.split(',').map(d => d.trim());
-    this.dialogRef.close(this.contacto);
+    
+    if (this.isEditMode) {
+      this.actualizarContacto();
+    } else {
+      this.agregarContacto();
+    }
+  }
+
+  agregarContacto(): void {
+    this.apiService.agregarContacto(this.contacto).subscribe({
+      next: response => {
+        console.log('Contacto agregado:', response);
+        this.dialogRef.close(this.contacto);
+      },
+      error: error => {
+        console.error('Error al agregar contacto:', error);
+        // Aquí puedes mostrar un mensaje de error si es necesario
+      }
+    });
+  }
+
+  actualizarContacto(): void {
+    this.apiService.updateContact(this.contacto).subscribe({
+      next: response => {
+        console.log('Contacto actualizado:', response);
+        this.dialogRef.close(this.contacto);
+      },
+      error: error => {
+        console.error('Error al actualizar contacto:', error);
+        // Aquí puedes mostrar un mensaje de error si es necesario
+      }
+    });
   }
 }
