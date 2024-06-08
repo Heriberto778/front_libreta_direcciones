@@ -12,11 +12,13 @@ export class ContactModalComponent {
     apellido_paterno: '',
     apellido_materno: '',
     telefonos: [] as string[],
-    emails: [] as string[]
+    emails: [] as string[],
+    direcciones: [] as string[]
   };
 
   telefonos = '';
   emails = '';
+  direcciones = '';
 
   constructor(public dialogRef: MatDialogRef<ContactModalComponent>) {}
 
@@ -27,7 +29,7 @@ export class ContactModalComponent {
   onSave(): void {
     this.contacto.telefonos = this.telefonos.split(',').map(t => t.trim());
     this.contacto.emails = this.emails.split(',').map(e => e.trim());
+    this.contacto.direcciones = this.direcciones.split(',').map(d => d.trim());
     this.dialogRef.close(this.contacto);
-    console.log('Contacto guardado:', this.contacto);
   }
 }
