@@ -20,3 +20,18 @@
     margin: 0;
     padding: 0;
   }
+
+  .btn-actualizar {
+    margin: 10px;
+    width: 100px;
+    background-color:rgb(0, 255, 13);
+  }
+  .btn-eliminar {
+    width: 100px;
+    margin: 10px;
+    background-color:rgba(255, 0, 0, 0.582);
+  }
+  .btn-agregar {
+    margin: 10px;
+    background-color:rgba(0, 119, 255, 0.733);
+  }
